@@ -3,10 +3,13 @@ import React from 'react';
 import './App.css';
 
 const Navbar = () => {
+  const logo = '/logo.png'; // Assuming the logo path is this
+  console.log('Logo path:', logo);
+
   return (
     <nav className="navbar">
       <div className="navbar-logo">
-        <img src="https://placehold.co/40x40/white/white" alt="NEXUS" className="logo-icon" />
+        <img src={logo} alt="NEXUS" className="logo-icon" />
         <span className="logo-text">NEXUS</span>
       </div>
       <div className="navbar-links">

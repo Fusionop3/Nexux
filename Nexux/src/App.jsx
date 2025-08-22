@@ -1,8 +1,8 @@
 // src/App.jsx
 import './App.css';
 import { useState } from 'react';
-import Navbar from './Navbar.jsx';
-import Auth from './Auth.jsx';
+import Navbar from './Navbar';
+import Auth from './Auth';
 
 function App() {
   const [showAuth, setShowAuth] = useState(false);
