@@ -1,0 +1,225 @@
+/* src/App.css */
+body {
+  font-family: 'Inter', sans-serif;
+  margin: 0;
+  padding: 0;
+  color: #c4d7e6;
+}
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #0b1526;
+  background-image: linear-gradient(180deg, #111a2f 0%, #0b1526 100%);
+}
+
+/* Navbar Styles */
+.navbar {
+  width: 100%; /* Ensure full width */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 2rem;
+  box-sizing: border-box; /* Prevent overflow */
+}
+
+.navbar-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: white;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.logo-icon {
+  width: 30px;
+  height: 30px;
+  background-color: #7868E6;
+  border-radius: 8px;
+}
+
+.logo-text {
+  text-transform: uppercase;
+}
+
+.navbar-links {
+  display: none;
+}
+
+.navbar-menu-icon {
+  cursor: pointer;
+}
+
+/* Landing Page Styles */
+.landing-page {
+  width: 100%; /* Ensure full width */
+  text-align: center;
+  padding: 2rem;
+  box-sizing: border-box; /* Prevent overflow */
+}
+
+.hero-section {
+  padding: 4rem 2rem;
+  background: transparent;
+  color: white;
+  margin-bottom: 2rem;
+}
+
+.hero-headline {
+  font-size: 4rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  line-height: 1.2;
+}
+
+.hero-subheadline {
+  font-size: 1.5rem;
+  color: #a4b3c4;
+  margin-bottom: 2rem;
+}
+
+.cta-button {
+  background-image: linear-gradient(135deg, #7868E6 0%, #C3B4FD 100%);
+  color: white;
+  border: none;
+  padding: 1rem 3rem;
+  border-radius: 50px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.cta-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(120, 104, 230, 0.4);
+}
+
+.features-section {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  padding-bottom: 4rem;
+}
+
+.feature-card {
+  background-color: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  padding: 2.5rem;
+  border-radius: 15px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  max-width: 300px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.feature-card img {
+  width: 64px;
+  height: 64px;
+  margin-bottom: 1.5rem;
+  border-radius: 12px;
+}
+
+.feature-card h3 {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+  color: white;
+}
+
+.feature-card p {
+  font-size: 1rem;
+  color: #a4b3c4;
+}
+
+/* Auth Page Styles */
+.auth-container {
+  min-height: 100vh;
+  background-color: #0b1526;
+  background-image: linear-gradient(180deg, #111a2f 0%, #0b1526 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.auth-card {
+  background-color: #1a233b;
+  padding: 2rem;
+  border-radius: 15px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+  text-align: center;
+  width: 100%;
+  max-width: 400px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  position: relative;
+}
+
+.form-group label {
+  color: #a4b3c4;
+}
+
+.form-group input {
+  background-color: #212c44;
+  border: 1px solid #3d4a66;
+  color: white;
+}
+
+.auth-button {
+  background-image: linear-gradient(135deg, #7868E6 0%, #C3B4FD 100%);
+  color: white;
+}
+
+.auth-button:hover {
+  background-image: linear-gradient(135deg, #6c5be5 0%, #b2a4f0 100%);
+}
+
+.google-auth-button {
+  background-color: #212c44;
+  border: 1px solid #3d4a66;
+  color: #a4b3c4;
+}
+
+.google-auth-button:hover {
+  background-color: #2a3551;
+}
+
+.divider {
+  color: #3d4a66;
+}
+
+.divider::before,
+.divider::after {
+  background-color: #3d4a66;
+}
+
+.toggle-auth-text {
+  margin-top: 1rem;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.toggle-link {
+  color: #a4b3c4;
+  text-decoration: underline;
+}
+
+.back-button {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  background: transparent;
+  border: none;
+  color: #a4b3c4;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .features-section {
+    flex-direction: column;
+    align-items: center;
+  }
+}
