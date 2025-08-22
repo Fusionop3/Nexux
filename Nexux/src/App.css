@@ -1,9 +1,21 @@
 /* src/App.css */
-body {
-  font-family: 'Inter', sans-serif;
+html, body {
   margin: 0;
   padding: 0;
+  width: 100%; /* Ensure full width */
+  height: 100%; /* Ensure full height */
+  overflow-x: hidden; /* Prevent horizontal scrolling */
+}
+
+body {
+  font-family: 'Inter', sans-serif;
   color: #c4d7e6;
+  background-color: #0b1526;
+  background-image: linear-gradient(180deg, #111a2f 0%, #0b1526 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .app-container {
@@ -12,18 +24,15 @@ body {
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background-color: #0b1526;
-  background-image: linear-gradient(180deg, #111a2f 0%, #0b1526 100%);
+  width: 100%; /* Ensure full width */
 }
 
-/* Navbar Styles */
 .navbar {
-  width: 100%; /* Ensure full width */
+  width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 1.5rem 2rem;
-  box-sizing: border-box; /* Prevent overflow */
 }
 
 .navbar-logo {
@@ -46,8 +55,21 @@ body {
   text-transform: uppercase;
 }
 
+/* Navbar Links */
 .navbar-links {
-  display: none;
+  display: flex;
+  gap: 1.5rem;
+}
+
+.navbar-link {
+  color: white;
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.navbar-link:hover {
+  color: #7868E6;
 }
 
 .navbar-menu-icon {
@@ -104,6 +126,7 @@ body {
   justify-content: center;
   gap: 2rem;
   padding-bottom: 4rem;
+  width: 100%; /* Ensure full width */
 }
 
 .feature-card {
@@ -138,8 +161,7 @@ body {
 /* Auth Page Styles */
 .auth-container {
   min-height: 100vh;
-  background-color: #0b1526;
-  background-image: linear-gradient(180deg, #111a2f 0%, #0b1526 100%);
+  width: 100%; /* Ensure full width */
   display: flex;
   justify-content: center;
   align-items: center;
