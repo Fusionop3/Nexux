@@ -1,22 +1,42 @@
 // src/Auth.jsx
-import { useState } from 'react';
+import "./Auth.css";
+import { useState } from "react";
+import { auth, googleProvider } from "./firebase";
+import {
+  signInWithPopup,
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
+} from "firebase/auth";
 
 const Auth = ({ onBack }) => {
   const [isLogin, setIsLogin] = useState(true);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
-  const handleGoogleSignIn = () => {
-    // Implement Firebase Google Auth here
-    console.log("Signing in with Google...");
+  // Google Sign In
+  const handleGoogleSignIn = async () => {
+    try {
+      const result = await signInWithPopup(auth, googleProvider);
+      console.log("Google User:", result.user);
+    } catch (error) {
+      console.error("Google Sign-In Error:", error.message);
+    }
   };
 
-  const handleSubmit = (e) => {
+  // Email + Password Auth
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (isLogin) {
-      // Handle login logic
-      console.log("Logging in...");
-    } else {
-      // Handle signup logic
-      console.log("Signing up...");
+
+    try {
+      if (isLogin) {
+        const userCredential = await signInWithEmailAndPassword(auth, email, password);
+        console.log("Logged in:", userCredential.user);
+      } else {
+        const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+        console.log("Signed up:", userCredential.user);
+      }
+    } catch (error) {
+      console.error("Auth Error:", error.message);
     }
   };
 
@@ -26,27 +46,48 @@ const Auth = ({ onBack }) => {
         <button onClick={onBack} className="back-button">
           &larr; Back
         </button>
-        <h2>{isLogin ? 'Log In' : 'Sign Up'}</h2>
+        <h2>{isLogin ? "Log In" : "Sign Up"}</h2>
         <form onSubmit={handleSubmit}>
           <div className="form-group">
             <label htmlFor="email">Email</label>
-            <input type="email" id="email" required />
+            <input
+              type="email"
+              id="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
           </div>
           <div className="form-group">
             <label htmlFor="password">Password</label>
-            <input type="password" id="password" required />
+            <input
+              type="password"
+              id="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
           </div>
-          <button type="submit" className="auth-button">{isLogin ? 'Log In' : 'Sign Up'}</button>
+          <button type="submit" className="auth-button">
+            {isLogin ? "Log In" : "Sign Up"}
+          </button>
         </form>
+
         <div className="divider">Or</div>
+
         <button className="google-auth-button" onClick={handleGoogleSignIn}>
-          <img src="https://placehold.co/20x20" alt="Google" className="google-logo" />
+          <img
+            src="https://www.svgrepo.com/show/355037/google.svg"
+            alt="Google"
+            className="google-logo"
+          />
           Continue with Google
         </button>
+
         <p className="toggle-auth-text">
           {isLogin ? "Don't have an account? " : "Already have an account? "}
           <span onClick={() => setIsLogin(!isLogin)} className="toggle-link">
-            {isLogin ? 'Sign Up' : 'Log In'}
+            {isLogin ? "Sign Up" : "Log In"}
           </span>
         </p>
       </div>
