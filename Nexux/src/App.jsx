@@ -1,8 +1,8 @@
 // src/App.jsx
 import './App.css';
 import { useState } from 'react';
-import Navbar from './Navbar';
 import Auth from './Auth';
+import logo from './assets/logo.png';
 
 function App() {
   const [showAuth, setShowAuth] = useState(false);
@@ -17,7 +17,21 @@ function App() {
         <Auth onBack={handleBackToLanding} />
       ) : (
         <div className="landing-page">
-          <Navbar />
+          {/* Navbar */}
+<nav className="navbar">
+  <div className="navbar-logo">
+    <img src={logo} alt="NEXUX" className="logo-icon" />
+    <span className="logo-text">NEXUX</span>
+  </div>
+  <div className="navbar-links">
+    <button className="cta-button small" onClick={() => setShowAuth(true)}>
+      Log in / Sign up
+    </button>
+  </div>
+</nav>
+
+
+          {/* Hero Section */}
           <header className="hero-section">
             <h1 className="hero-headline">Effortless File Sharing. Securely.</h1>
             <p className="hero-subheadline">
@@ -28,7 +42,8 @@ function App() {
             </button>
           </header>
 
-          <section className="features-section">
+          {/* Features Section */}
+          <section className="features-section" id="features">
             <div className="feature-card">
               <img src="https://placehold.co/64x64/8E89EE/white?text=S" alt="Secure Storage" />
               <h3>Secure Storage</h3>
