@@ -10,6 +10,9 @@ import {
   FaSignOutAlt,
   FaSearch,
   FaPlus,
+  FaEye,
+  FaDownload,
+  FaTrash,
 } from "react-icons/fa";
 
 const Dashboard = () => {
@@ -60,10 +63,18 @@ const Dashboard = () => {
                   </p>
                 </div>
                 <div className="file-actions">
-                  <button className="pill-btn">Preview</button>
-                  <button className="pill-btn">Download</button>
-                  <button className="pill-btn">Share</button>
-                  <button className="pill-btn danger">Delete</button>
+                  <button className="pill-btn">
+                    <FaEye /> Preview
+                  </button>
+                  <button className="pill-btn">
+                    <FaDownload /> Download
+                  </button>
+                  <button className="pill-btn">
+                    <FaShareAlt /> Share
+                  </button>
+                  <button className="pill-btn danger">
+                    <FaTrash /> Delete
+                  </button>
                 </div>
               </div>
             ))

@@ -43,9 +43,24 @@
   background: #21262d;
 }
 
-.sidebar .logout {
-  color: #ff6b6b;
-  margin-top: auto;
+/* Highlight active sidebar tab */
+.sidebar ul li.active {
+  background: #181f32;
+  color: #7868e6;
+  border-radius: 8px;
+  font-weight: bold;
+}
+.sidebar ul li {
+  cursor: pointer;
+  padding: 0.7rem 1.2rem;
+  transition: background 0.2s, color 0.2s;
+}
+.sidebar ul li:not(.active):hover {
+  background: #141a28;
+  color: #b3aaff;
+}
+.sidebar ul li.logout {
+  color: #e74c3c;
 }
 
 /* Main Content */
@@ -129,4 +144,99 @@
   margin-top: 10px;
   font-weight: 500;
   word-break: break-all;
+}
+.file-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+.pill-btn {
+  background: #232b42;
+  color: #c4d7e6;
+  border: none;
+  border-radius: 20px;
+  padding: 0.4rem 1.2rem;
+  margin: 0.1rem 0;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+.pill-btn:hover {
+  background: #7868E6;
+  color: #fff;
+}
+.pill-btn.danger {
+  background: #2d1a1a;
+  color: #e74c3c;
+}
+.pill-btn.danger:hover {
+  background: #e74c3c;
+  color: #fff;
+}
+.upload-table {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 1.5rem;
+  max-width: 500px;
+}
+
+.upload-row {
+  display: flex;
+  align-items: center;
+  background: #181f32;
+  border-radius: 10px;
+  padding: 1rem 1.5rem;
+  gap: 1rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+}
+
+.file-icon {
+  font-size: 1.5rem;
+  color: #8e89ee;
+}
+
+.upload-name {
+  flex: 1;
+  font-weight: 500;
+  color: #c4d7e6;
+}
+
+.status-badge {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.3rem 1rem;
+  border-radius: 20px;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.status-icon {
+  font-size: 1.1rem;
+}
+
+.status-badge.uploaded {
+  background: #232e3d;
+  color: #4be07b;
+}
+.status-icon.uploaded {
+  color: #4be07b;
+}
+
+.status-badge.pending {
+  background: #232e3d;
+  color: #f7c948;
+}
+.status-icon.pending {
+  color: #f7c948;
+}
+
+.status-badge.failed {
+  background: #232e3d;
+  color: #e74c3c;
+}
+.status-icon.failed {
+  color: #e74c3c;
 }
