@@ -1,35 +1,49 @@
 // src/components/Settings.jsx
-import React, { useState } from "react";
+import React from "react";
+import { FaLock, FaBell, FaCog } from "react-icons/fa";
 
 const Settings = () => {
-  const [darkMode, setDarkMode] = useState(false);
+  // Mock user data to display
+  const user = {
+    name: "John Doe",
+    email: "johndoe@example.com",
+    avatar: "https://i.pravatar.cc/150?img=1", // A random avatar service
+    storageUsed: 7.2,
+    storageTotal: 10,
+  };
 
   return (
-    <div className="settings">
-      <h3>Profile</h3>
-      <div className="profile">
-        <img src="https://via.placeholder.com/80" alt="Profile" />
-        <p><strong>John Doe</strong></p>
-        <p>johndoe@example.com</p>
+    <div className="settings-container">
+      <h3 className="section-title">Profile</h3>
+      <div className="profile-card">
+        <img
+          src={user.avatar}
+          alt="Profile"
+          className="profile-avatar"
+        />
+        <div className="profile-info">
+          <p className="profile-name">
+            <strong>{user.name}</strong>
+          </p>
+          <p className="profile-email">{user.email}</p>
+        </div>
       </div>
 
-      <h3>Preferences</h3>
-      <div className="toggle">
-        <label>
-          <input 
-            type="checkbox" 
-            checked={darkMode} 
-            onChange={() => setDarkMode(!darkMode)} 
-          />
-          Dark Mode
-        </label>
+      <h3 className="section-title">Security & Preferences</h3>
+      <div className="settings-options">
+        <div className="pill-btn">
+          <FaLock />
+          <span>Change Password</span>
+        </div>
+        <div className="pill-btn">
+          <FaBell />
+          <span>Notification Settings</span>
+        </div>
+        <div className="pill-btn">
+          <FaCog />
+          <span>General Preferences</span>
+        </div>
       </div>
-
-      <h3>Storage</h3>
-      <div className="storage-bar">
-        <div className="used" style={{ width: "65%" }}></div>
-      </div>
-      <p>6.5 GB of 10 GB used</p>
     </div>
   );
 };

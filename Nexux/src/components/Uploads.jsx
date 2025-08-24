@@ -1,10 +1,13 @@
+// src/components/Uploads.jsx
 import React from "react";
 import { FaFileAlt, FaCheckCircle, FaClock, FaTimesCircle } from "react-icons/fa";
 
+// Remove this line: import "./Uploads.css";
+
 const uploads = [
-  { id: 1, name: "Video.mp4", status: "Uploaded" },
-  { id: 2, name: "Music.mp3", status: "Pending" },
-  { id: 3, name: "Design.fig", status: "Failed" },
+  { id: 1, name: "video.mp4", status: "Uploaded" },
+  { id: 2, name: "music.mp3", status: "Pending" },
+  { id: 3, name: "design.fig", status: "Failed" },
 ];
 
 const statusIcon = {
@@ -20,8 +23,10 @@ const Uploads = () => {
       <div className="upload-table">
         {uploads.map((file) => (
           <div className="upload-row" key={file.id}>
-            <FaFileAlt className="file-icon" />
-            <span className="upload-name">{file.name}</span>
+            <div className="upload-left">
+              <FaFileAlt className="file-icon" />
+              <span className="upload-name">{file.name}</span>
+            </div>
             <span className={`status-badge ${file.status.toLowerCase()}`}>
               {statusIcon[file.status]} {file.status}
             </span>

@@ -1,6 +1,8 @@
-// src/Dashboard.jsx
 import React, { useState } from "react";
 import UploadModal from "./Uploadmodal";
+// Correct the import paths
+import Uploads from "./components/Uploads";
+import Settings from "./components/Settings";
 import "./Dashboard.css";
 import {
   FaHome,
@@ -17,10 +19,9 @@ import {
 
 const Dashboard = () => {
   const [showModal, setShowModal] = useState(false);
-  const [activeTab, setActiveTab] = useState("home"); // "home" | "uploads" | "shared" | "settings"
+  const [activeTab, setActiveTab] = useState("home");
   const [query, setQuery] = useState("");
 
-  // Dummy data (UI only)
   const files = [
     { id: 1, name: "example.pdf", size: "1.2 MB", date: "Aug 20, 2025" },
     { id: 2, name: "screenshot.png", size: "2.5 MB", date: "Aug 18, 2025" },
@@ -30,19 +31,12 @@ const Dashboard = () => {
     f.name.toLowerCase().includes(query.toLowerCase())
   );
 
-  const uploadsHistory = [
-    { id: 1, name: "video.mp4", status: "Uploaded" },
-    { id: 2, name: "music.mp3", status: "Pending" },
-    { id: 3, name: "design.fig", status: "Failed" },
-  ];
-
   const sharedFiles = [
     { id: 1, name: "project.zip", link: "https://dummy.link/123" },
     { id: 2, name: "invoice.pdf", link: "https://dummy.link/456" },
   ];
 
   const handleLogout = () => {
-    // UI-only logout; route back to landing if you want
     window.location.href = "/";
   };
 
@@ -82,28 +76,9 @@ const Dashboard = () => {
         </div>
       );
     }
-
     if (activeTab === "uploads") {
-      return (
-        <div className="upload-list">
-          <h3>Upload History</h3>
-          <ul>
-            {uploadsHistory.map((u) => (
-              <li key={u.id}>
-                <span>{u.name}</span>
-                <span
-                  className={`status-badge ${u.status.toLowerCase()}`}
-                  title={u.status}
-                >
-                  {u.status}
-                </span>
-              </li>
-            ))}
-          </ul>
-        </div>
-      );
+      return <Uploads />;
     }
-
     if (activeTab === "shared") {
       return (
         <div className="shared-list">
@@ -126,43 +101,11 @@ const Dashboard = () => {
         </div>
       );
     }
-
-    // settings
-    return (
-      <div className="settings">
-        <h3>Profile</h3>
-        <div className="profile-card">
-          <img
-            src="https://via.placeholder.com/72"
-            alt="avatar"
-            className="avatar"
-          />
-          <div>
-            <p className="profile-name">John Doe</p>
-            <p className="profile-email">john@example.com</p>
-          </div>
-        </div>
-
-        <h3>Preferences</h3>
-        <div className="prefs">
-          <label className="toggle">
-            <input type="checkbox" />
-            <span>Dark Mode</span>
-          </label>
-        </div>
-
-        <h3>Storage</h3>
-        <div className="storage-bar">
-          <div className="used" style={{ width: "65%" }} />
-        </div>
-        <p>6.5 GB of 10 GB used</p>
-      </div>
-    );
+    return <Settings />;
   };
 
   return (
     <div className="dashboard-container">
-      {/* Sidebar */}
       <aside className="sidebar">
         <h2 className="logo">NEXUX</h2>
         <ul>
@@ -195,10 +138,7 @@ const Dashboard = () => {
           </li>
         </ul>
       </aside>
-
-      {/* Main Content */}
       <div className="main-content">
-        {/* Topbar */}
         <div className="topbar">
           <div className="search-box">
             <FaSearch />
@@ -213,12 +153,8 @@ const Dashboard = () => {
             <FaPlus /> Upload
           </button>
         </div>
-
-        {/* Tab Content */}
         <div className="content">{renderContent()}</div>
       </div>
-
-      {/* Upload Modal */}
       {showModal && <UploadModal onClose={() => setShowModal(false)} />}
     </div>
   );
