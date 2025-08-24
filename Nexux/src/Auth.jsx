@@ -1,93 +1,59 @@
 // src/Auth.jsx
-import "./Auth.css";
-import { useState } from "react";
-import { auth, googleProvider } from "./firebase";
-import {
-  signInWithPopup,
-  signInWithEmailAndPassword,
-  createUserWithEmailAndPassword,
-} from "firebase/auth";
+import './Auth.css';
+import React, { useState } from "react";
+import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import { auth } from "./firebase"; // ✅ import initialized auth
 
-const Auth = ({ onBack }) => {
+const Auth = ({ onBack, onSuccess }) => {
   const [isLogin, setIsLogin] = useState(true);
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
 
-  // Google Sign In
-  const handleGoogleSignIn = async () => {
-    try {
-      const result = await signInWithPopup(auth, googleProvider);
-      console.log("Google User:", result.user);
-    } catch (error) {
-      console.error("Google Sign-In Error:", error.message);
-    }
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // TODO: Replace with real login/signup logic
+    onSuccess();
   };
 
-  // Email + Password Auth
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
+  const handleGoogleSignIn = async () => {
+    const provider = new GoogleAuthProvider();
     try {
-      if (isLogin) {
-        const userCredential = await signInWithEmailAndPassword(auth, email, password);
-        console.log("Logged in:", userCredential.user);
-      } else {
-        const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-        console.log("Signed up:", userCredential.user);
-      }
+      await signInWithPopup(auth, provider);
+      onSuccess();
     } catch (error) {
-      console.error("Auth Error:", error.message);
+      console.error(error);
+      alert("Google sign-in failed. Please try again.");
     }
   };
 
   return (
     <div className="auth-container">
-      <div className="auth-card">
-        <button onClick={onBack} className="back-button">
-          &larr; Back
+      <div className="auth-box">
+        <button className="back-btn" onClick={onBack}>
+          ← Back
         </button>
-        <h2>{isLogin ? "Log In" : "Sign Up"}</h2>
+        <h2>{isLogin ? "Login" : "Sign Up"}</h2>
+
         <form onSubmit={handleSubmit}>
-          <div className="form-group">
-            <label htmlFor="email">Email</label>
-            <input
-              type="email"
-              id="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-            />
-          </div>
-          <div className="form-group">
-            <label htmlFor="password">Password</label>
-            <input
-              type="password"
-              id="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
-          </div>
-          <button type="submit" className="auth-button">
-            {isLogin ? "Log In" : "Sign Up"}
-          </button>
+          {!isLogin && (
+            <input type="text" placeholder="Full Name" required />
+          )}
+          <input type="email" placeholder="Email" required />
+          <input type="password" placeholder="Password" required />
+          <button type="submit">{isLogin ? "Login" : "Sign Up"}</button>
         </form>
 
-        <div className="divider">Or</div>
-
-        <button className="google-auth-button" onClick={handleGoogleSignIn}>
+        {/* Google Sign-In Button */}
+        <button className="google-btn" type="button" onClick={handleGoogleSignIn}>
           <img
-            src="https://www.svgrepo.com/show/355037/google.svg"
+            src="https://www.svgrepo.com/show/475656/google-color.svg"
             alt="Google"
-            className="google-logo"
           />
           Continue with Google
         </button>
 
-        <p className="toggle-auth-text">
-          {isLogin ? "Don't have an account? " : "Already have an account? "}
-          <span onClick={() => setIsLogin(!isLogin)} className="toggle-link">
-            {isLogin ? "Sign Up" : "Log In"}
+        <p className="toggle-text">
+          {isLogin ? "Don't have an account?" : "Already have an account?"}{" "}
+          <span onClick={() => setIsLogin(!isLogin)}>
+            {isLogin ? "Sign Up" : "Login"}
           </span>
         </p>
       </div>

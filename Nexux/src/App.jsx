@@ -1,35 +1,29 @@
-// src/App.jsx
 import './App.css';
 import { useState } from 'react';
 import Auth from './Auth';
+import Dashboard from './Dashboard';
 import logo from './assets/logo.png';
 
 function App() {
-  const [showAuth, setShowAuth] = useState(false);
-
-  const handleBackToLanding = () => {
-    setShowAuth(false);
-  };
+  const [page, setPage] = useState("landing"); 
+  // "landing" | "auth" | "dashboard"
 
   return (
     <div className="app-container">
-      {showAuth ? (
-        <Auth onBack={handleBackToLanding} />
-      ) : (
+      {page === "landing" && (
         <div className="landing-page">
           {/* Navbar */}
-<nav className="navbar">
-  <div className="navbar-logo">
-    <img src={logo} alt="NEXUX" className="logo-icon" />
-    <span className="logo-text">NEXUX</span>
-  </div>
-  <div className="navbar-links">
-    <button className="cta-button small" onClick={() => setShowAuth(true)}>
-      Log in / Sign up
-    </button>
-  </div>
-</nav>
-
+          <nav className="navbar">
+            <div className="navbar-logo">
+              <img src={logo} alt="NEXUX" className="logo-icon" />
+              <span className="logo-text">NEXUX</span>
+            </div>
+            <div className="navbar-links">
+              <button className="cta-button small" onClick={() => setPage("auth")}>
+                Log in / Sign up
+              </button>
+            </div>
+          </nav>
 
           {/* Hero Section */}
           <header className="hero-section">
@@ -37,7 +31,7 @@ function App() {
             <p className="hero-subheadline">
               Share, store, and access your files from anywhere, anytime.
             </p>
-            <button className="cta-button" onClick={() => setShowAuth(true)}>
+            <button className="cta-button" onClick={() => setPage("auth")}>
               Get Started
             </button>
           </header>
@@ -62,6 +56,12 @@ function App() {
           </section>
         </div>
       )}
+
+      {page === "auth" && (
+        <Auth onBack={() => setPage("landing")} onSuccess={() => setPage("dashboard")} />
+      )}
+
+      {page === "dashboard" && <Dashboard />}
     </div>
   );
 }
