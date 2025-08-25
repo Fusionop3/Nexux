@@ -15,7 +15,8 @@ import {
   FaDownload,
   FaTrash,
 } from "react-icons/fa";
-import { logout } from "./firebase";  // 👈 logout import
+import { signOut } from "firebase/auth";
+import { auth } from "./firebase";
 
 const Dashboard = () => {
   const [showModal, setShowModal] = useState(false);
@@ -36,11 +37,10 @@ const Dashboard = () => {
     { id: 2, name: "invoice.pdf", link: "https://dummy.link/456" },
   ];
 
-  // 🔹 logout handler
   const handleLogout = async () => {
     try {
-      await logout();
-      window.location.href = "/auth"; // 👈 redirect to login
+      await signOut(auth);
+      window.location.href = "/";
     } catch (error) {
       console.error(error);
       alert("Logout failed.");
@@ -83,7 +83,9 @@ const Dashboard = () => {
         </div>
       );
     }
-    if (activeTab === "uploads") return <Uploads />;
+    if (activeTab === "uploads") {
+      return <Uploads />;
+    }
     if (activeTab === "shared") {
       return (
         <div className="shared-list">
@@ -143,7 +145,6 @@ const Dashboard = () => {
           </li>
         </ul>
       </aside>
-
       <div className="main-content">
         <div className="topbar">
           <div className="search-box">
@@ -161,7 +162,6 @@ const Dashboard = () => {
         </div>
         <div className="content">{renderContent()}</div>
       </div>
-
       {showModal && <UploadModal onClose={() => setShowModal(false)} />}
     </div>
   );
