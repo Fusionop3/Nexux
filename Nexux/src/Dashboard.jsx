@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import UploadModal from "./Uploadmodal";
-// Correct the import paths
 import Uploads from "./components/Uploads";
 import Settings from "./components/Settings";
 import "./Dashboard.css";
@@ -16,6 +15,8 @@ import {
   FaDownload,
   FaTrash,
 } from "react-icons/fa";
+import { signOut } from "firebase/auth";
+import { auth } from "./firebase";
 
 const Dashboard = () => {
   const [showModal, setShowModal] = useState(false);
@@ -36,8 +37,14 @@ const Dashboard = () => {
     { id: 2, name: "invoice.pdf", link: "https://dummy.link/456" },
   ];
 
-  const handleLogout = () => {
-    window.location.href = "/";
+  const handleLogout = async () => {
+    try {
+      await signOut(auth);
+      window.location.href = "/";
+    } catch (error) {
+      console.error(error);
+      alert("Logout failed.");
+    }
   };
 
   const renderContent = () => {

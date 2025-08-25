@@ -1,12 +1,26 @@
+// App.jsx
 import './App.css';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Auth from './Auth';
 import Dashboard from './Dashboard';
 import logo from './assets/logo.png';
+import { auth } from './firebase';   // ✅ firebase auth import
+import { onAuthStateChanged } from "firebase/auth";
 
 function App() {
-  const [page, setPage] = useState("landing"); 
-  // "landing" | "auth" | "dashboard"
+  const [page, setPage] = useState("landing");
+
+  useEffect(() => {
+    // Firebase listener to check if user is logged in
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setPage("dashboard"); // user logged in
+      } else {
+        setPage("landing"); // user not logged in
+      }
+    });
+    return () => unsubscribe();
+  }, []);
 
   return (
     <div className="app-container">

@@ -1,16 +1,35 @@
 // src/Auth.jsx
 import './Auth.css';
 import React, { useState } from "react";
-import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
-import { auth } from "./firebase"; // ✅ import initialized auth
+import {
+  GoogleAuthProvider,
+  signInWithPopup,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword
+} from "firebase/auth";
+import { auth } from "./firebase";
 
 const Auth = ({ onBack, onSuccess }) => {
   const [isLogin, setIsLogin] = useState(true);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [fullName, setFullName] = useState("");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // TODO: Replace with real login/signup logic
-    onSuccess();
+    try {
+      if (isLogin) {
+        // Login
+        await signInWithEmailAndPassword(auth, email, password);
+      } else {
+        // Sign Up
+        await createUserWithEmailAndPassword(auth, email, password);
+      }
+      onSuccess();
+    } catch (error) {
+      console.error(error);
+      alert(error.message);
+    }
   };
 
   const handleGoogleSignIn = async () => {
@@ -34,10 +53,28 @@ const Auth = ({ onBack, onSuccess }) => {
 
         <form onSubmit={handleSubmit}>
           {!isLogin && (
-            <input type="text" placeholder="Full Name" required />
+            <input
+              type="text"
+              placeholder="Full Name"
+              value={fullName}
+              onChange={(e) => setFullName(e.target.value)}
+              required
+            />
           )}
-          <input type="email" placeholder="Email" required />
-          <input type="password" placeholder="Password" required />
+          <input
+            type="email"
+            placeholder="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
+          <input
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
           <button type="submit">{isLogin ? "Login" : "Sign Up"}</button>
         </form>
 
