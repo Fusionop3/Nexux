@@ -40,7 +40,7 @@ const Dashboard = () => {
   const handleLogout = async () => {
     try {
       await logout();
-      window.location.href = "auth"; // 👈 redirect to login
+      window.location.href = "/auth"; // 👈 redirect to login
     } catch (error) {
       console.error(error);
       alert("Logout failed.");
