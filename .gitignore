@@ -1,2 +1,18 @@
+ni .gitignore
+@"
+# Node / Build
 node_modules/
+dist/
+build/
+
+# Env / Secrets
 .env
+.env.*
+Backend/.env
+Backend/.env.*
+
+# Certs / Keys
+*.pem
+*.key
+*.pfx
+*.crt
