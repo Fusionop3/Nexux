@@ -30,7 +30,7 @@ const Dashboard = () => {
   const fetchFiles = async () => {
     setLoading(true);
     try {
-      const response = await axios.get("https://nexux.onrender.com/");
+      const response = await axios.get("https://nexux.onrender.com/files");
       const sortedFiles = response.data.sort(
         (a, b) => new Date(b.LastModified) - new Date(a.LastModified)
       );
