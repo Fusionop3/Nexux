@@ -26,7 +26,7 @@ const s3 = new AWS.S3({
 
 // 🟢 List all files
 app.get("/files", (req, res) => {
-  const params = { Bucket: process.env.S3_BUCKET };
+  const params = { Bucket: process.env.S3_BUCKET_NAME };
 
   s3.listObjectsV2(params, (err, data) => {
     console.log("S3 listObjectsV2 Response:", data);
@@ -51,7 +51,7 @@ app.get("/files", (req, res) => {
 // 🟢 Upload file
 app.post("/upload", upload.single("file"), (req, res) => {
   const params = {
-    Bucket: process.env.S3_BUCKET,
+    Bucket: process.env.S3_BUCKET_NAME,
     Key: req.file.originalname,
     Body: req.file.buffer,
     ContentType: req.file.mimetype,
@@ -69,7 +69,7 @@ app.post("/upload", upload.single("file"), (req, res) => {
 // 🟢 Download file
 app.get("/download/:filename", (req, res) => {
   const params = {
-    Bucket: process.env.S3_BUCKET,
+    Bucket: process.env.S3_BUCKET_NAME,
     Key: req.params.filename,
   };
 
@@ -86,7 +86,7 @@ app.get("/download/:filename", (req, res) => {
 // 🟢 Delete file
 app.delete("/delete/:filename", (req, res) => {
   const params = {
-    Bucket: process.env.S3_BUCKET,
+    Bucket: process.env.S3_BUCKET_NAME,
     Key: req.params.filename,
   };
 
@@ -107,5 +107,3 @@ const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`🚀 Server running on port ${PORT}`);
 });
-
-

@@ -3,6 +3,7 @@ import axios from "axios";
 import UploadModal from "./UploadModal";
 import Settings from "./components/Settings";
 import Uploads from "./components/Uploads";
+import config from "./config";
 import "./Dashboard.css";
 import {
   FaHome,
@@ -30,7 +31,7 @@ const Dashboard = () => {
   const fetchFiles = async () => {
     setLoading(true);
     try {
-      const response = await axios.get("https://nexux.onrender.com/files");
+      const response = await axios.get(`${config.API_BASE_URL}/files`);
       const sortedFiles = response.data.sort(
         (a, b) => new Date(b.LastModified) - new Date(a.LastModified)
       );
@@ -68,7 +69,7 @@ const Dashboard = () => {
   const handleDelete = async (filename) => {
     if (window.confirm(`Are you sure you want to delete ${filename}?`)) {
       try {
-        await axios.delete(`https://nexux.onrender.com/delete/${filename}`);
+        await axios.delete(`${config.API_BASE_URL}/delete/${filename}`);
         alert("File deleted successfully!");
         fetchFiles();
       } catch (error) {
@@ -79,11 +80,11 @@ const Dashboard = () => {
   };
 
   const handleDownload = (filename) => {
-    window.location.href = `https://nexux.onrender.com/download/${filename}`;
+    window.location.href = `${config.API_BASE_URL}/download/${filename}`;
   };
 
   const handleShare = (filename) => {
-    const shareLink = `https://nexux.onrender.com/download/${filename}`;
+    const shareLink = `${config.API_BASE_URL}/download/${filename}`;
     navigator.clipboard.writeText(shareLink);
     setShareMessage(`Download link copied to clipboard!`);
     setTimeout(() => {

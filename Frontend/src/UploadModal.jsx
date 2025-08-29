@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import config from "./config";
 import "./UploadModal.css";
 import { FaTimes, FaCloudUploadAlt, FaCheckCircle, FaExclamationCircle, FaClock } from "react-icons/fa";
 
@@ -29,7 +30,7 @@ const UploadModal = ({ onClose, onUploadStart, onUploadSuccess, onUploadFailure 
     formData.append("file", file);
 
     try {
-      await axios.post("http://localhost:3000/upload", formData, {
+      await axios.post(`${config.API_BASE_URL}/upload`, formData, {
         headers: { "Content-Type": "multipart/form-data" },
       });
 
