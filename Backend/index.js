@@ -98,9 +98,14 @@ app.delete("/delete/:filename", (req, res) => {
     res.json({ message: "File deleted successfully" });
   });
 });
+app.get("/", (req, res) => {
+  res.send("✅ Backend is running!");
+});
 
 // 🟢 Start server (Fixed for Render)
 const PORT = process.env.PORT || 3000;  
 app.listen(PORT, () => {
   console.log(`🚀 Server running on port ${PORT}`);
 });
+
+
