@@ -1,4 +1,4 @@
-import express from "express";
+import express from "express"; 
 import AWS from "aws-sdk";
 import multer from "multer";
 import dotenv from "dotenv";
@@ -93,5 +93,8 @@ app.delete("/delete/:filename", (req, res) => {
   });
 });
 
-// Start server
-app.listen(3000, () => console.log("🚀 Server running on http://localhost:3000"));
+// 🟢 Start server (Fixed for Render)
+const PORT = process.env.PORT || 3000;  
+app.listen(PORT, () => {
+  console.log(`🚀 Server running on port ${PORT}`);
+});
