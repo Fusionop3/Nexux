@@ -68,7 +68,7 @@ const Dashboard = () => {
   const handleDelete = async (filename) => {
     if (window.confirm(`Are you sure you want to delete ${filename}?`)) {
       try {
-        await axios.delete(`http://localhost:3000/delete/${filename}`);
+        await axios.delete(`https://nexux.onrender.com/delete/${filename}`);
         alert("File deleted successfully!");
         fetchFiles();
       } catch (error) {
@@ -79,11 +79,11 @@ const Dashboard = () => {
   };
 
   const handleDownload = (filename) => {
-    window.location.href = `http://localhost:3000/download/${filename}`;
+    window.location.href = `https://nexux.onrender.com/download/${filename}`;
   };
 
   const handleShare = (filename) => {
-    const shareLink = `http://localhost:3000/download/${filename}`;
+    const shareLink = `https://nexux.onrender.com/download/${filename}`;
     navigator.clipboard.writeText(shareLink);
     setShareMessage(`Download link copied to clipboard!`);
     setTimeout(() => {
