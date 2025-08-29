@@ -8,8 +8,14 @@ dotenv.config();
 const app = express();
 const upload = multer({ storage: multer.memoryStorage() });
 
-// CORS enable so frontend can access backend
-app.use(cors());
+// ✅ Allow only your frontend URL
+app.use(
+  cors({
+    origin: "https://nexux-sigma.vercel.app", 
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    credentials: true,
+  })
+);
 
 // AWS Config
 const s3 = new AWS.S3({
